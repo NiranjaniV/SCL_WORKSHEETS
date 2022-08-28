@@ -12,35 +12,36 @@ def isDiagonalDominant(a):
             return False
     return True
 
-n = int(input("Enter the number of equations: "))
-eqns = []
-for i in range(n):
-    s = input("Enter equation " + str(i+1) + ":")
-    eqns.append(s)
-a = []
-for x in eqns:
-    x = re.findall("(-?[\d]+)", x)
-    x = [int(i) for i in x]
-    a.append(x)
-    
-print("Matrix form: ")
-for i in range(len(a)):
-    print(a[i])
 
-
-if(isDiagonalDominant(a)):
-    i = 0
-    initail  = [0]*n
-    values = [0]*n
-    maxiter = 25
-    while i < maxiter:
-        for j in range(len(a)):
-            k =0
-            values[j] = a[j][-1]
-            while k < (len(a[j])-1):
-                if k!=j:
-                    values[j] -= values[k]*a[j][k]
-                k+=1      
-            values[j] /= a[j][j];
-        print(values)
-        i+=1;
+def seidel(a, x ,b):
+    #Finding length of a(3)       
+    n = len(a)                   
+    # for loop for 3 times as to calculate x, y , z
+    for j in range(0, n):        
+        # temp variable d to store b[j]
+        d = b[j]                  
+          
+        # to calculate respective xi, yi, zi
+        for i in range(0, n):     
+            if(j != i):
+                d-=a[j][i] * x[i]
+        # updating the value of our solution        
+        x[j] = d / a[j][j]
+    # returning our updated solution           
+    return x    
+   
+# int(input())input as number of variable to be solved                
+n = 3                              
+a = []                            
+b = []        
+# initial solution depending on n(here n=3)                     
+x = [0, 0, 0]                        
+a = [[4, 1, 2],[3, 5, 1],[1, 1, 3]]
+b = [4,7,3]
+print(x)
+  
+#loop run for m times depending on m the error value
+for i in range(0, 25):            
+    x = seidel(a, x, b)
+    #print each time the updated solution
+    print(x)           
