@@ -61,4 +61,32 @@ for i in range(m):
          
     if flag == 1:
         break
+ ------------------------------------------------------------------------
+import numpy
+ref = True
+rref = True
+arr = numpy.array([[1, 2, 0 ,3, 0],[0 ,0, 1, 1, 1],[0, 0, 0 ,0, 1],[0, 0, 0, 0, 0]])
+row,col = arr.shape
+for i in range(row):
+    for j in range(col):
+        if arr[i][j]==1 and i!=row-1:
+            if j!=0 and arr[i][j]-arr[i][j-1]==0:
+                continue
+            for k in range(i+1,row):
+                if arr[k][j]!=0:
+                    ref = False
+                    print("Not in REF")
+                    break
+            if i!=0:
+             for l in range(i-1,-1,-1):
+                if arr[l][j]!=0:
+                    rref = False
+                    print("Not in RREF")
+                    break
+if rref and ref:
+    print("It is in rref")
+elif ref:
+    print("It is in Ref")
+else :
+    print("It is not in ref")
         
