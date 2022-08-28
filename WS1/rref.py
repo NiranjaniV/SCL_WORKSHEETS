@@ -89,4 +89,13 @@ elif ref:
     print("It is in Ref")
 else :
     print("It is not in ref")
+    
+------------------------------
+def augmented_matrix(eqn_list,eqn_count):
+    aug_matrix=[]
+    for i in eqn_list:
+         val = re.findall(r'[\d\.\-\+]+',i)
+         val = [int(x) for x in val]
+         aug_matrix.append(val)
+    return aug_matrix
         
