@@ -1,0 +1,21 @@
+def fixed_point_iteration(f, limit):
+    a = float(limit[0])
+    b = float(limit[1])
+
+    phi = -(f - f.coeff(x, 1) * x) / f.coeff(x, 1)
+
+    if diff(phi, x).subs(x, a) < 1 and diff(phi, x).subs(x, b) < 1:
+        pass
+    else:
+        print("Cannot use Fixed Point Iteration Method")
+        return
+
+    t = float(a)
+
+    while f.subs(x, t) > 0.0001 or f.subs(x, t) < -0.0001:
+        print("t =", t, "\nf(t) =", f.subs(x, t), end = "\n\n")
+        t = phi.subs(x, t)
+
+    print("SOLUTION\nx = {x}\nf(x) = {fx}".format(x = t, fx = f.subs(x, t)))
+
+fixed_point_iteration(f,limit)
