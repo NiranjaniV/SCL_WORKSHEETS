@@ -1,0 +1,26 @@
+import numpy as np
+
+x = [5,6,9,11]
+y = [12,13,14,16]
+
+unknown = float(input("Enter the value to find:"))
+ans =0
+num =1
+den =1
+i=0
+while i<len(x):
+    for j in range(len(x)):
+        if i!=j:
+            num = num*(unknown - x[j])
+    for k in range(len(x)):
+        if i!=k:
+            den*=(x[i]-x[k])
+    print("Numerator is:",num)
+    print("Denominator is:",den)
+    ans +=((num/den)*y[i])
+    print("Ans is:",ans)
+    num=1
+    den=1
+    i+=1
+    
+print("The answer is:",ans)
