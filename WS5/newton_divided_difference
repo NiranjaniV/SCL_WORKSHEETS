@@ -1,0 +1,45 @@
+#NEWTONS DIVIDED DIFFERENCE METHOD
+import pandas as pd
+
+def newton_interpolation(x, y, xi):
+    #length/number of datapoints
+    n = len(x)
+    #divided difference initialization
+    fdd = [[None for x in range(n)] for x in range(n)]
+    #f(X) values at different degrees
+    yint = [None for x in range(n)]
+    #error value
+    ea = [None for x in range(n)]
+    
+    #finding divided difference
+    for i in range(n):
+        fdd[i][0] = y[i]
+    for j in range(1,n):
+        for i in range(n-j):
+            fdd[i][j] = (fdd[i+1][j-1] - fdd[i][j-1])/(x[i+j]-x[i])
+    
+    #just printing dd here
+    print("The Divided Difference table is:")
+    fdd_table = pd.DataFrame(fdd)
+    print(fdd_table)
+    
+    #interpolating xi
+    xterm = 1
+    yint[0] = fdd[0][0]
+    for order in range(1, n):
+        xterm = xterm * (xi - x[order-1])
+        yint2 = yint[order-1] + fdd[0][order]*xterm
+        ea[order-1] = yint2 - yint[order-1]
+        yint[order] = yint2
+    
+    #returning a map for pandas dataframe
+    return map(lambda yy, ee : [yy, ee], yint, ea)
+
+
+x = [1,1.3,1.6,1.9,2.2]
+y = [0.7651977,0.6200860,0.4554022,0.2818186,0.1103623]
+xi= 1.5
+a = newton_interpolation(x, y, xi)
+df = pd.DataFrame(a, columns=['f(x)','error'])
+
+print("The interpolated value at {} is {}".format(xi,round((df['f(x)'][len(df.index)-1]),3)))
