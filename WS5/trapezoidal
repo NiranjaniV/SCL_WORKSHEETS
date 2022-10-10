@@ -26,3 +26,33 @@ sub_interval = int(input("Enter number of sub intervals: "))
 # Call trapezoidal() method and get result
 result = trapezoidal(lower_limit, upper_limit, sub_interval)
 print("Integration result by Trapezoidal method is: %0.6f" % (result) )
+
+#Trapezoidal 2
+def trapezoidal(t,v,h):
+  sum=0
+  for i in range(len(t)):
+    if i==0:
+      sum+=v[i]
+    elif i==len(t)-1:
+      sum+=v[i]
+    else:
+      sum+=2*v[i]
+  return sum*h/2
+
+def simpson(t,v,h):
+  sum=0
+  for i in range(len(t)):
+    if i==0 or i==len(t)-1:
+      sum+=v[i]
+    elif i%2==0:
+      sum+=2*v[i]
+    else:
+      sum+=4*v[i]
+  return sum*h/3
+t=[0,5,10,15,20,25,30,35,40]
+v=[30,24,19.5,16,13.6,11.7,10.0,8.5,7.0]
+h=abs(t[0]-t[1])
+print('By trapezoidal method: ',end=' ')
+print(trapezoidal(t,v,h))
+print('By Simpson method: ',end=' ')
+print(simpson(t,v,h))
