@@ -64,6 +64,9 @@ for i in range(1, n+1):
     def dydx(x, y):
     return x+y
  
+def dydx(x, y):
+    return x+y
+ 
 # Finds value of y for a given x using step size h
 # and initial value y0 at x0.
 def rungeKutta4(x0, y0, x, h):
@@ -92,4 +95,3 @@ y = 1
 x = 0.2
 h = 0.2
 print ('The value of y at x is:', rungeKutta4(x0, y, x, h))
-
